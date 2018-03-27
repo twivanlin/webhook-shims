@@ -66,7 +66,10 @@ def slack(NUMRESULTS=10, ALERTID=None, T=None, B=None, X=None):
     }
     try:
         if ('AlertName' in a):
-            slack_attachments.append({ "pretext": a['moreinfo'], })
+            tmp = a['moreinfo']
+            tmp = tmp.strip().split('\n')[:2]
+            tmp = "\n".join(tmp)
+            slack_attachments.append({ "pretext": tmp, })
             if ('Messages' in a):
                 for message in a['Messages'][:NUMRESULTS]:
                     slack_attachments.append(slack_fields(color, message))
