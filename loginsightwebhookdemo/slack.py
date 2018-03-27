@@ -21,13 +21,13 @@ def slack_fields(color, message):
         "color": color,
         "fallback": message.get('text', '') if 'text' in message else "Alert details",
         "text": message.get('text', '') if 'text' in message else "Alert details",
-        "fields": [
-            {  # start of dict comprehension
-                "title": f['name'],
-                "value": f['content'],
-                "short": True if len(f['content']) < 20 else False
-            } for f in message['fields'] if not f['name'].startswith('__')
-        ]
+        #"fields": [
+        #    {  # start of dict comprehension
+        #        "title": f['name'],
+        #        "value": f['content'],
+        #        "short": True if len(f['content']) < 20 else False
+        #    } for f in message['fields'] if not f['name'].startswith('__')
+        #]
     }
 
 
