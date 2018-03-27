@@ -66,9 +66,14 @@ def slack(NUMRESULTS=10, ALERTID=None, T=None, B=None, X=None):
     }
     try:
         if ('AlertName' in a):
+            # remove "Alert Details" field in 'moreinfo'
             tmp = a['moreinfo']
-            tmp = tmp.strip().split('\n')[:2]
+            tmp = tmp.strip().split('\n')
+            tmp.remove('')
+            [tmp.remove(t) for t in tmp if t.startswith('Alert Details')]
             tmp = "\n".join(tmp)
+            # end removal
+            
             slack_attachments.append({ "pretext": tmp, })
             if ('Messages' in a):
                 for message in a['Messages'][:NUMRESULTS]:
