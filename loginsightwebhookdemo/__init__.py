@@ -106,7 +106,7 @@ def parseLI(payload, alert):
     if ('Info' in payload and payload['Info'] is not None):
         alert.update({"info": payload['Info']})
     elif ('messages' in payload and payload['messages'] is not None and len(payload['messages']) > 0):
-        alert.update({"info": payload['messages'][0]['text']})
+        alert.update({"info": payload['messages'][0].get('text', '')})
     else:
         alert.update({"info": ""})
     if ('Messages' in alert and not alert['Messages']): # If a test alert
